@@ -17,8 +17,18 @@ A simple web app to track the hours you work and check that your salary is calcu
 
 Open `index.html` in any browser. No installation needed.
 
+## Install on your phone
+
+The app is an installable web app (PWA): once it's hosted on an HTTPS address (e.g. GitHub Pages), open that address on your phone and:
+
+- **Android (Chrome):** tap **Install app** in the header, or ⋮ → **Install app**.
+- **iPhone (Safari):** tap Share → **Add to Home Screen**.
+
+It gets its own icon, opens full screen and works offline.
+
 ## Files
 
 - `index.html` – page layout
 - `style.css` – styles (green, black, white, blue)
 - `app.js` – calculations and app logic
+- `manifest.webmanifest`, `sw.js`, `icons/` – install and offline support

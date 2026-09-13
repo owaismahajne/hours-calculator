@@ -488,6 +488,32 @@ const NUMBER_MIN = { rate: 0, otAfter: 0, otPercent: 100 };
   });
 });
 
+// ---------- Install as an app ----------
+let installPrompt = null;
+
+// Android/desktop Chrome offer an install prompt; show our button when they do.
+window.addEventListener("beforeinstallprompt", (e) => {
+  e.preventDefault();
+  installPrompt = e;
+  $("installBtn").hidden = false;
+});
+
+$("installBtn").addEventListener("click", async () => {
+  if (!installPrompt) return;
+  installPrompt.prompt();
+  await installPrompt.userChoice;
+  installPrompt = null;
+  $("installBtn").hidden = true;
+});
+
+window.addEventListener("appinstalled", () => { $("installBtn").hidden = true; });
+
+try {
+  if ("serviceWorker" in navigator && location.protocol !== "file:") {
+    navigator.serviceWorker.register("sw.js").catch(() => { /* offline support unavailable here */ });
+  }
+} catch (e) { /* some embedded pages block service workers */ }
+
 // ---------- Start ----------
 $("date").value = today();
 render();
